@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import { Link } from 'react-router';
 
 function Home() {
     const [projects, setProjects] = useState([]);
@@ -23,16 +23,33 @@ function Home() {
     }, []);
 
     return (
-        <div>
-            <h1>Benvenuto nel mio Portfolio</h1>
+        <div className="container py-5">
+            <h1 className="mb-4">Il mio Portfolio</h1>
 
-            <ul>
+            <div className="row g-4">
                 {projects.map((project) => (
-                    <li key={project.id}>
-                        {project.title}
-                    </li>
+                    <div className="col-12 col-md-6 col-lg-4" key={project.id}>
+                        <div className="card h-100 shadow-sm">
+                            <div className="card-body d-flex flex-column">
+                                <h5 className="card-title">
+                                    {project.title}
+                                </h5>
+
+                                <p className="card-text">
+                                    {project.description}
+                                </p>
+
+                                <Link
+                                    to={`/projects/${project.id}`}
+                                    className="btn btn-primary mt-auto"
+                                >
+                                    Visualizza progetto
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }
